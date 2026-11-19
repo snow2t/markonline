@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARK ONLINE</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #f5f5f5;
+    --gray: #929292;
+    --border: rgba(255,255,255,.16);
+}
+
+body {
+    background: #030303;
+    color: var(--white);
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* SPACE BACKGROUND */
+
+.space {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(ellipse at 50% 45%, #171717 0%, #080808 45%, #000 100%);
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+        radial-gradient(1px 1px at 80% 15%, white 99%, transparent),
+        radial-gradient(2px 2px at 30% 70%, white 99%, transparent),
+        radial-gradient(1px 1px at 65% 85%, white 99%, transparent),
+        radial-gradient(1px 1px at 90% 60%, white 99%, transparent),
+        radial-gradient(1px 1px at 45% 35%, white 99%, transparent),
+        radial-gradient(2px 2px at 15% 90%, white 99%, transparent),
+        radial-gradient(1px 1px at 72% 45%, white 99%, transparent);
+    background-size: 250px 250px;
+    animation: drift 100s linear infinite;
+    opacity: .65;
+}
+
+@keyframes drift {
+    from { transform: translateY(0); }
+    to { transform: translateY(250px); }
+}
+
+/* HEADER */
+
+header {
+    width: 100%;
+    height: 75px;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,.35);
+}
+
+.brand {
+    font-size: 17px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.brand span {
+    color: #858585;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.system-status {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #aaa;
+}
+
+.online-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: white;
+    border-radius: 50%;
+    margin-right: 7px;
+    box-shadow: 0 0 10px white;
+}
+
+/* MAIN */
+
+main {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.logo {
+    font-size: clamp(45px, 9vw, 85px);
+    font-weight: 200;
+    letter-spacing: 13px;
+    margin-left: 13px;
+    text-shadow: 0 0 35px rgba(255,255,255,.2);
+}
+
+.subtitle {
+    color: #858585;
+    letter-spacing: 5px;
+    font-size: 10px;
+    margin-top: 12px;
+}
+
+/* SEARCH */
+
+.search-area {
+    width: 100%;
+    max-width: 680px;
+    margin-top: 65px;
+}
+
+.search-box {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 5px;
+    padding: 5px 7px 5px 20px;
+    transition: .3s;
+}
+
+.search-box:focus-within {
+    border-color: white;
+    box-shadow: 0 0 25px rgba(255,255,255,.08);
+}
+
+.search-icon {
+    color: #aaa;
+    font-size: 22px;
+    margin-right: 13px;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.search-box input::placeholder {
+    color: #777;
+}
+
+.search-box button {
+    height: 44px;
+    padding: 0 23px;
+    background: white;
+    color: black;
+    border: none;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.search-box button:hover {
+    background: #bdbdbd;
+}
+
+/* SEARCH OPTIONS */
+
+.search-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* SHORTCUTS */
+
+.section-label {
+    margin-top: 65px;
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.shortcuts {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.shortcut {
+    width: 115px;
+    height: 100px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.025);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.shortcut:hover {
+    background: rgba(255,255,255,.1);
+    border-color: white;
+    transform: translateY(-4px);
+}
+
+.shortcut-icon {
+    font-size: 23px;
+    color: white;
+}
+
+.shortcut-name {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #aaa;
+}
+
+/* CLOCK */
+
+.clock-area {
+    margin-top: 55px;
+}
+
+.clock {
+    font-size: 27px;
+    font-weight: 200;
+    letter-spacing: 5px;
+}
+
+.date {
+    margin-top: 9px;
+    font-size: 10px;
+    color: #777;
+    letter-spacing: 3px;
+}
+
+/* FOOTER */
+
+footer {
+    min-height: 45px;
+    padding: 12px 5%;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #686868;
+    font-size: 9px;
+    letter-spacing: 2px;
+    gap: 10px;
+}
+
+.footer-right {
+    display: flex;
+    gap: 18px;
+}
+
+footer span {
+    cursor: default;
+}
+
+/* FULLSCREEN BUTTON */
+
+.fullscreen {
+    background: none;
+    color: #aaa;
+    border: 1px solid var(--border);
+    padding: 9px 13px;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.fullscreen:hover {
+    color: white;
+    border-color: white;
+}
+
+@media(max-width:600px) {
+    .logo {
+        letter-spacing: 7px;
+    }
+
+    header {
+        padding: 0 18px;
+    }
+
+    .system-status {
+        font-size: 8px;
+    }
+
+    .shortcut {
+        width: 95px;
+    }
+
+    footer {
+        font-size: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="space"></div>
+<div class="stars"></div>
+
+<header>
+
+    <div class="brand">
+        MARK <span>ONLINE</span>
+    </div>
+
+    <div class="header-right">
+        <div class="system-status">
+            <span class="online-dot"></span>
+            SYSTEM ACTIVE
+        </div>
+
+        <button class="fullscreen" onclick="toggleFullscreen()">
+            FULLSCREEN ⛶
+        </button>
+    </div>
+
+</header>
+
+<main>
+
+    <div class="logo">MARK</div>
+
+    <div class="subtitle">
+        PERSONAL NETWORK INTERFACE
+    </div>
+
+    <div class="search-area">
+
+        <div class="search-box">
+
+            <div class="search-icon">⌕</div>
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Enter URL or search the web..."
+                autocomplete="off"
+                onkeydown="if(event.key==='Enter') searchWeb()"
+            >
+
+            <button onclick="searchWeb()">
+                ENTER
+            </button>
+
+        </div>
+
+        <div class="search-options">
+            <span>WEB ACCESS // ENABLED</span>
+            <span>HTTP / HTTPS</span>
+        </div>
+
+    </div>
+
+    <div class="section-label">
+        QUICK ACCESS
+    </div>
+
+    <div class="shortcuts">
+
+        <div class="shortcut" onclick="openSite('https://google.com')">
+            <div class="shortcut-icon">◉</div>
+            <div class="shortcut-name">GOOGLE</div>
+        </div>
+
+        <div class="shortcut" onclick="openSite('https://youtube.com')">
+            <div class="shortcut-icon">▷</div>
+            <div class="shortcut-name">YOUTUBE</div>
+        </div>
+
+        <div class="shortcut" onclick="openSite('https://github.com')">
+            <div class="shortcut-icon">⌘</div>
+            <div class="shortcut-name">GITHUB</div>
+        </div>
+
+        <div class="shortcut" onclick="openSite('https://wikipedia.org')">
+            <div class="shortcut-icon">◎</div>
+            <div class="shortcut-name">WIKIPEDIA</div>
+        </div>
+
+    </div>
+
+    <div class="clock-area">
+
+        <div class="clock" id="clock">00:00:00</div>
+
+        <div class="date" id="date"></div>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <span>MARK ONLINE // VERSION 1.0</span>
+
+    <div class="footer-right">
+        <span>PERSONAL ACCESS</span>
+        <span>EST. 2026</span>
+    </div>
+
+</footer>
+
+<script>
+
+// SEARCH ENGINE
+
+function searchWeb() {
+
+    let input = document.getElementById("search").value.trim();
+
+    if (!input) return;
+
+    let destination;
+
+    if (
+        input.includes(".") &&
+        !input.includes(" ")
+    ) {
+
+        destination = input;
+
+        if (!/^https?:\/\//i.test(destination)) {
+            destination = "https://" + destination;
+        }
+
+    } else {
+
+        destination =
+            "https://www.google.com/search?q=" +
+            encodeURIComponent(input);
+
+    }
+
+    try {
+
+        let parsed = new URL(destination);
+
+        if (
+            parsed.protocol !== "https:" &&
+            parsed.protocol !== "http:"
+        ) {
+            return;
+        }
+
+        window.location.href = parsed.href;
+
+    } catch {
+
+        alert("Invalid address.");
+
+    }
+
+}
+
+// QUICK ACCESS
+
+function openSite(url) {
+    window.location.href = url;
+}
+
+// FULLSCREEN
+
+function toggleFullscreen() {
+
+    if (!document.fullscreenElement) {
+
+        document.documentElement.requestFullscreen();
+
+    } else {
+
+        document.exitFullscreen();
+
+    }
+
+}
+
+// LIVE CLOCK
+
+function updateClock() {
+
+    let now = new Date();
+
+    document.getElementById("clock").textContent =
+        now.toLocaleTimeString("en-US", {
+            hour12: false
+        });
+
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }).toUpperCase();
+
+}
+
+updateClock();
+
+setInterval(updateClock, 1000);
+
+</script>
+
+</body>
+</html>
